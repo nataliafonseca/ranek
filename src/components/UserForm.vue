@@ -7,7 +7,13 @@
     <label for="password">Senha</label>
     <input type="password" id="password" name="password" v-model="password" />
     <label for="postalCode">CEP</label>
-    <input type="text" id="postalCode" name="postalCode" v-model="postalCode" />
+    <input
+      type="text"
+      id="postalCode"
+      name="postalCode"
+      v-model="postalCode"
+      @blur="fillAddress"
+    />
     <label for="street">Rua</label>
     <input type="text" id="street" name="street" v-model="street" />
     <label for="houseNumber">Número</label>
@@ -31,6 +37,7 @@
 
 <script>
 import { mapFields } from "@/helpers.js";
+import getAddress from "@/services/viaCep.js";
 
 export default {
   name: "UserForm",
@@ -50,6 +57,19 @@ export default {
       base: "user",
       mutation: "UPDATE_USER",
     }),
+  },
+  methods: {
+    fillAddress() {
+      const cep = this.postalCode.replace(/\D/g, "");
+      if (cep.length === 8) {
+        getAddress(cep).then((response) => {
+          this.street = response.logradouro;
+          this.district = response.bairro;
+          this.city = response.localidade;
+          this.state = response.uf;
+        });
+      }
+    },
   },
 };
 </script>
