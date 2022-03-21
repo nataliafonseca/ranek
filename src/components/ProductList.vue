@@ -1,26 +1,35 @@
 <template>
   <section class="products-container">
-    <div v-if="products && products.length" class="products">
-      <div v-for="(product, index) in products" :key="index" class="product">
-        <router-link :to="{ name: 'home' }">
-          <img
-            v-if="product.fotos"
-            :src="product.fotos[0].src"
-            :alt="product.fotos[0].titulo"
-          />
-          <p class="price">{{ product.preco | priceFormat }}</p>
-          <h2 class="title">{{ product.nome }}</h2>
-          <p>{{ product.descricao }}</p>
-        </router-link>
+    <transition mode="out-in">
+      <div
+        v-if="products && products.length"
+        class="products"
+        key="product-list"
+      >
+        <div v-for="(product, index) in products" :key="index" class="product">
+          <router-link :to="{ name: 'product', params: { id: product.id } }">
+            <img
+              v-if="product.pictures"
+              :src="product.pictures[0].src"
+              :alt="product.pictures[0].titulo"
+            />
+            <p class="price">{{ product.price | priceFormat }}</p>
+            <h2 class="title">{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+          </router-link>
+        </div>
+        <products-pagination
+          :productsTotal="productsTotal"
+          :productsPerPage="productsPerPage"
+        />
       </div>
-      <products-pagination
-        :productsTotal="productsTotal"
-        :productsPerPage="productsPerPage"
-      />
-    </div>
-    <div v-else-if="products">
-      <p class="no-results">Busca sem resultados. Tente buscar outro termo.</p>
-    </div>
+      <div v-else-if="products" key="no-results">
+        <p class="no-results">
+          Busca sem resultados. Tente buscar outro termo.
+        </p>
+      </div>
+      <loading-dots v-else key="loading" />
+    </transition>
   </section>
 </template>
 
@@ -39,15 +48,6 @@ export default {
       productsTotal: 0,
     };
   },
-  filters: {
-    priceFormat(value) {
-      return Number(value).toLocaleString("pt-BR", {
-        minimumFractionDigits: 2,
-        style: "currency",
-        currency: "BRL",
-      });
-    },
-  },
   computed: {
     query() {
       let queryString = serialize(this.$route.query);
@@ -56,10 +56,13 @@ export default {
   },
   methods: {
     getProducts() {
-      api.get(`produto/${this.query}`).then((response) => {
-        this.productsTotal = Number(response.headers["x-total-count"]);
-        this.products = response.data;
-      });
+      this.products = null;
+      setTimeout(() => {
+        api.get(`product/${this.query}`).then((response) => {
+          this.productsTotal = Number(response.headers["x-total-count"]);
+          this.products = response.data;
+        });
+      }, 1500);
     },
   },
   created() {

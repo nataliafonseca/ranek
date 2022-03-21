@@ -2,7 +2,9 @@
   <div id="app">
     <page-header />
     <main id="main">
-      <router-view />
+      <transition mode="out-in">
+        <router-view />
+      </transition>
     </main>
     <page-footer />
   </div>
@@ -35,15 +37,15 @@ p {
   padding: 0;
 }
 
-ul {
-  list-style: none;
-}
-
 body {
   font-family: "Avenir", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", Arial, sans-serif;
   color: #345;
   background: url("./assets/pattern.svg") repeat top;
+}
+
+ul {
+  list-style: none;
 }
 
 a {
@@ -87,6 +89,10 @@ img {
   flex: 1;
 }
 
+label {
+  margin-bottom: 5px;
+}
+
 input,
 textarea {
   border-radius: 4px;
@@ -106,5 +112,23 @@ textarea:hover {
   outline: none;
   box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
   border-color: #87f;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+
+.v-enter {
+  transform: translate3d(0, -20px, 0);
+}
+
+.v-leave-to {
+  transform: translate3d(0, 20px, 0);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.3s;
 }
 </style>

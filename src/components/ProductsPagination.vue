@@ -3,7 +3,11 @@
     <div>
       <strong>{{ (currentPage - 1) * productsPerPage + 1 }}</strong> -
       <strong>
-        {{ (currentPage - 1) * productsPerPage + productsPerPage }}
+        {{
+          currentPage === lastPage
+            ? productsTotal
+            : (currentPage - 1) * productsPerPage + productsPerPage
+        }}
       </strong>
       de <strong>{{ productsTotal }}</strong>
     </div>
@@ -36,10 +40,10 @@
         >
       </template>
 
-      <template v-if="currentPage < this.totalPages - offset">
-        <span v-if="currentPage < this.totalPages - offset - 1">...</span>
-        <router-link :to="{ query: query(totalPages) }">{{
-          totalPages
+      <template v-if="currentPage < this.lastPage - offset">
+        <span v-if="currentPage < this.lastPage - offset - 1">...</span>
+        <router-link :to="{ query: query(lastPage) }">{{
+          lastPage
         }}</router-link>
       </template>
     </div>
@@ -82,7 +86,7 @@ export default {
     },
   },
   computed: {
-    totalPages() {
+    lastPage() {
       const total = this.productsTotal / this.productsPerPage;
       return total !== Infinity ? Math.ceil(total) : 0;
     },
@@ -98,11 +102,11 @@ export default {
         : [];
     },
     nextPages() {
-      return this.currentPage < this.totalPages
+      return this.currentPage < this.lastPage
         ? this.generatePagesArray(
             this.currentPage + 1,
             this.currentPage + this.offset
-          ).filter((page) => page <= this.totalPages)
+          ).filter((page) => page <= this.lastPage)
         : [];
     },
   },
