@@ -23,6 +23,18 @@
       "district": "Recreio",
       "city": "Rio de Janeiro",
       "state": "RJ"
+    },
+    {
+      "id": "nat@nat.naty",
+      "name": "naty",
+      "email": "nat@nat.naty",
+      "password": "123456",
+      "postalCode": "49020210",
+      "street": "Avenida Professor Acrísio Cruz",
+      "houseNumber": "200",
+      "district": "Salgado Filho",
+      "city": "Aracaju",
+      "state": "SE"
     }
   ],
   "product": [

@@ -55,22 +55,19 @@ export default {
     },
   },
   methods: {
-    getProducts() {
+    async getProducts() {
       this.products = null;
-      setTimeout(() => {
-        api.get(`product/${this.query}`).then((response) => {
-          this.productsTotal = Number(response.headers["x-total-count"]);
-          this.products = response.data;
-        });
-      }, 1500);
+      const response = await api.get(`product/${this.query}`);
+      this.productsTotal = Number(response.headers["x-total-count"]);
+      this.products = response.data;
     },
   },
-  created() {
-    this.getProducts();
+  async created() {
+    await this.getProducts();
   },
   watch: {
-    query() {
-      this.getProducts();
+    async query() {
+      await this.getProducts();
     },
   },
 };

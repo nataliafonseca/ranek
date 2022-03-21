@@ -6,7 +6,9 @@
         Criar Conta
       </button>
       <user-form v-else>
-        <button class="btn btn-register">Registrar</button>
+        <button class="btn btn-register" @click.prevent="registerUser">
+          Registrar
+        </button>
       </user-form>
     </transition>
   </section>
@@ -21,6 +23,12 @@ export default {
     return {
       create: false,
     };
+  },
+  methods: {
+    async registerUser() {
+      await this.$store.dispatch("registerUser", this.$store.state.user);
+      await this.$store.dispatch("getUser", this.$store.state.user.email);
+    },
   },
 };
 </script>

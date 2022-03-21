@@ -59,15 +59,14 @@ export default {
     }),
   },
   methods: {
-    fillAddress() {
+    async fillAddress() {
       const cep = this.postalCode.replace(/\D/g, "");
       if (cep.length === 8) {
-        getAddress(cep).then((response) => {
-          this.street = response.logradouro;
-          this.district = response.bairro;
-          this.city = response.localidade;
-          this.state = response.uf;
-        });
+        const response = await getAddress(cep);
+        this.street = response.logradouro;
+        this.district = response.bairro;
+        this.city = response.localidade;
+        this.state = response.uf;
       }
     },
   },

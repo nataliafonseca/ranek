@@ -30,11 +30,10 @@ export default {
     };
   },
   methods: {
-    getProduct() {
+    async getProduct() {
       this.product = null;
-      api
-        .get(`product/${this.id}`)
-        .then((response) => (this.product = response.data));
+      const response = await api.get(`product/${this.id}`);
+      this.product = response.data;
     },
   },
   created() {
