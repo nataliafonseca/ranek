@@ -13,6 +13,10 @@
           <p>{{ product.descricao }}</p>
         </router-link>
       </div>
+      <products-pagination
+        :productsTotal="productsTotal"
+        :productsPerPage="productsPerPage"
+      />
     </div>
     <div v-else-if="products">
       <p class="no-results">Busca sem resultados. Tente buscar outro termo.</p>
@@ -21,15 +25,18 @@
 </template>
 
 <script>
+import ProductsPagination from "@/components/ProductsPagination.vue";
 import api from "@/services/api";
 import { serialize } from "@/helpers";
 
 export default {
   name: "ProductList",
+  components: { ProductsPagination },
   data() {
     return {
       products: null,
       productsPerPage: 9,
+      productsTotal: 0,
     };
   },
   filters: {
@@ -50,6 +57,7 @@ export default {
   methods: {
     getProducts() {
       api.get(`produto/${this.query}`).then((response) => {
+        this.productsTotal = Number(response.headers["x-total-count"]);
         this.products = response.data;
       });
     },
