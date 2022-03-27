@@ -11,7 +11,7 @@
             <img
               v-if="product.pictures"
               :src="product.pictures[0].src"
-              :alt="product.pictures[0].titulo"
+              :alt="product.pictures[0].title"
             />
             <p class="price">{{ product.price | priceFormat }}</p>
             <h2 class="title">{{ product.name }}</h2>
@@ -82,7 +82,7 @@ export default {
 .products {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 30px;
+  gap: 30px;
   margin: 30px;
 }
 

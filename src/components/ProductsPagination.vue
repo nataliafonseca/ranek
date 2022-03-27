@@ -134,7 +134,7 @@ export default {
   padding: 2px 8px;
   border-radius: 4px;
   margin: 4px;
-  background: #dee1e9;
+  background: #f4f7fc;
 }
 
 .page-buttons a.router-link-exact-active,

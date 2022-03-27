@@ -26,8 +26,13 @@ export default {
   },
   methods: {
     async registerUser() {
-      await this.$store.dispatch("registerUser", this.$store.state.user);
-      await this.$store.dispatch("getUser", this.$store.state.user.email);
+      try {
+        await this.$store.dispatch("registerUser", this.$store.state.user);
+        await this.$store.dispatch("getUser", this.$store.state.user.email);
+        this.$router.push({ name: "user" });
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

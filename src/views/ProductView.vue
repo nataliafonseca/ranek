@@ -10,7 +10,12 @@
         <h1>{{ product.name }}</h1>
         <p class="price">{{ product.price | priceFormat }}</p>
         <p class="description">{{ product.description }}</p>
-        <button class="btn" v-if="!product.sold">Comprar</button>
+        <transition mode="out-in" v-if="!product.sold">
+          <button class="btn" @click="complete = true" v-if="!complete">
+            Comprar
+          </button>
+          <complete-purchase :product="product" v-else />
+        </transition>
         <button class="btn" v-else disabled>Produto Vendido</button>
       </div>
     </div>
@@ -20,13 +25,16 @@
 
 <script>
 import api from "@/services/api";
+import CompletePurchase from "@/components/CompletePurchase.vue";
 
 export default {
   name: "ProductView",
   props: ["id"],
+  components: { CompletePurchase },
   data() {
     return {
       product: null,
+      complete: false,
     };
   },
   methods: {
@@ -46,7 +54,7 @@ export default {
 .product {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 30px;
+  gap: 30px;
   max-width: 900px;
   padding: 60px 20px;
   margin: 0 auto;

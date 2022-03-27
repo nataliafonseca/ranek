@@ -32,6 +32,7 @@ ul,
 li,
 h1,
 h2,
+h3,
 p {
   margin: 0;
   padding: 0;
@@ -48,7 +49,8 @@ ul {
   list-style: none;
 }
 
-a {
+a,
+button {
   color: inherit;
   text-decoration: none;
 }

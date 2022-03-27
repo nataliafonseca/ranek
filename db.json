@@ -1,4 +1,72 @@
 {
+  "transaction": [
+    {
+      "buyerId": "nat@nat.nat",
+      "sellerId": "andre@origamid.com",
+      "product": {
+        "id": "notebook",
+        "name": "Notebook",
+        "userId": "andre@origamid.com",
+        "price": "4999",
+        "sold": false,
+        "description": "Esse é um novo notebook.",
+        "pictures": null
+      },
+      "deliveryAddress": {
+        "postalCode": "123456789",
+        "street": "Rua Ali Perto",
+        "houseNumber": "24",
+        "district": "Recreio",
+        "city": "Rio de Janeiro",
+        "state": "RJ"
+      },
+      "id": 1
+    },
+    {
+      "buyerId": "nat@nat.nat",
+      "sellerId": "andre@origamid.com",
+      "product": {
+        "id": "smartphone",
+        "name": "Smartphone",
+        "userId": "andre@origamid.com",
+        "price": "1999",
+        "sold": false,
+        "description": "Esse é um novo smartphone.",
+        "pictures": null
+      },
+      "deliveryAddress": {
+        "postalCode": "123456789",
+        "street": "Rua Ali Perto",
+        "houseNumber": "24",
+        "district": "Recreio",
+        "city": "Rio de Janeiro",
+        "state": "RJ"
+      },
+      "id": 2
+    },
+    {
+      "buyerId": "ana@ana.ana",
+      "sellerId": "andre@origamid.com",
+      "product": {
+        "id": "tablet",
+        "name": "Tablet",
+        "userId": "andre@origamid.com",
+        "price": "1399",
+        "sold": false,
+        "description": "Esse é um novo tablet.",
+        "pictures": null
+      },
+      "deliveryAddress": {
+        "postalCode": "49020210",
+        "street": "Avenida Professor Acrísio Cruz",
+        "houseNumber": "210",
+        "district": "Salgado Filho",
+        "city": "Aracaju",
+        "state": "SE"
+      },
+      "id": 3
+    }
+  ],
   "user": [
     {
       "id": "andre@origamid.com",
@@ -14,24 +82,24 @@
     },
     {
       "id": "nat@nat.nat",
-      "email": "nat@nat.nat",
       "name": "Natália Fonseca",
+      "email": "nat@nat.nat",
       "password": "123",
+      "postalCode": "123456789",
       "street": "Rua Ali Perto",
-      "postalCode": "12345678",
-      "houseNumber": "25",
+      "houseNumber": "24",
       "district": "Recreio",
       "city": "Rio de Janeiro",
       "state": "RJ"
     },
     {
-      "id": "nat@nat.naty",
-      "name": "naty",
-      "email": "nat@nat.naty",
+      "id": "ana@ana.ana",
+      "name": "Nati",
+      "email": "ana@ana.ana",
       "password": "123456",
       "postalCode": "49020210",
       "street": "Avenida Professor Acrísio Cruz",
-      "houseNumber": "200",
+      "houseNumber": "210",
       "district": "Salgado Filho",
       "city": "Aracaju",
       "state": "SE"
@@ -41,7 +109,7 @@
     {
       "id": "notebook",
       "name": "Notebook",
-      "user_id": "andre@origamid.com",
+      "userId": "andre@origamid.com",
       "price": "4999",
       "sold": false,
       "description": "Esse é um novo notebook.",
@@ -50,7 +118,7 @@
     {
       "id": "smartphone",
       "name": "Smartphone",
-      "user_id": "andre@origamid.com",
+      "userId": "andre@origamid.com",
       "price": "1999",
       "sold": false,
       "description": "Esse é um novo smartphone.",
@@ -59,7 +127,7 @@
     {
       "id": "tablet",
       "name": "Tablet",
-      "user_id": "andre@origamid.com",
+      "userId": "andre@origamid.com",
       "price": "1399",
       "sold": false,
       "description": "Esse é um novo tablet.",
